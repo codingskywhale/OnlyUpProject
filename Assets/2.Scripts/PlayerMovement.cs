@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-    public float runSpeed = 10f;
-    public float jumpForce = 5f;
+    public float moveSpeed;
+    public float runSpeed;
+    public float jumpForce;
 
     private Rigidbody rb;
     private bool isGrounded;

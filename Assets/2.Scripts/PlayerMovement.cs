@@ -1,66 +1,118 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Movement")]
     public float moveSpeed;
-    public float runSpeed;
-    public float jumpForce;
+    public float jumpPower;
+    private Vector2 curMovementInput;
+    public LayerMask groundLayerMask;
 
-    private Rigidbody rb;
-    private bool isGrounded;
+    private Rigidbody rigidbody;
 
-    void Start()
+    [Header("Look")]
+    public Transform cameraContainer;
+    public float minXLook;
+    public float maxXLook;
+    private float camCurXRot;
+    public float lookSensitivity;
+    private Vector2 mouseDelta;
+    public bool canLook = true;
+
+
+
+    private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        rigidbody = GetComponent<Rigidbody>();
+    }
+
+    private void Start()
+    {
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Move();
-        Jump();
+    }
+
+    private void LateUpdate()
+    {
+         CameraLook();
     }
 
     void Move()
     {
-        float moveX = Input.GetAxis("Horizontal");
-        float moveZ = Input.GetAxis("Vertical");
+        Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
+        dir *= moveSpeed;
+        dir.y = rigidbody.velocity.y;
 
-        Vector3 move = transform.right * moveX + transform.forward * moveZ;
-
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            rb.velocity = move * runSpeed + new Vector3(0, rb.velocity.y, 0);
-        }
-        else
-        {
-            rb.velocity = move * moveSpeed + new Vector3(0, rb.velocity.y, 0);
-        }
+        rigidbody.velocity = dir;
     }
 
-    void Jump()
+    void CameraLook()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        camCurXRot += mouseDelta.y * lookSensitivity;
+        camCurXRot = Mathf.Clamp(camCurXRot, minXLook, maxXLook);
+
+        cameraContainer.localEulerAngles = new Vector3(-camCurXRot, 0, 0);
+
+        transform.eulerAngles += new Vector3(0, mouseDelta.x * lookSensitivity, 0);
+    }
+
+
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
         {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            curMovementInput = context.ReadValue<Vector2>();
+        }
+        else if (context.phase == InputActionPhase.Canceled)
+        {
+            curMovementInput = Vector2.zero;
         }
     }
 
-    void OnCollisionStay(Collision collision)
+    public void OnLook(InputAction.CallbackContext context)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        mouseDelta = context.ReadValue<Vector2>();
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started && (IsGrounded()))
         {
-            isGrounded = true;
+            rigidbody.AddForce(Vector2.up * (jumpPower), ForceMode.Impulse);
         }
     }
 
-    void OnCollisionExit(Collision collision)
+
+
+    bool IsGrounded()
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        Ray[] rays = new Ray[4]
         {
-            isGrounded = false;
+            new Ray(transform.position + (transform.forward * 0.2f) + (transform.up * 0.01f), Vector3.down),
+            new Ray(transform.position + (-transform.forward * 0.2f) + (transform.up * 0.01f), Vector3.down),
+            new Ray(transform.position + (transform.right * 0.2f) + (transform.up * 0.01f), Vector3.down),
+            new Ray(transform.position + (-transform.right * 0.2f) +(transform.up * 0.01f), Vector3.down)
+        };
+
+        for (int i = 0; i < rays.Length; i++)
+        {
+            if (Physics.Raycast(rays[i], 1f, groundLayerMask))
+            {
+                return true;
+            }
         }
+
+        return false;
     }
+
 }

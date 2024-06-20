@@ -17,6 +17,8 @@ public class UIManager : MonoBehaviour
     public GameObject InGameUIPrefab;
     public GameObject InGameUI;
 
+    public Dictionary<GameState, GameObject> GameUI = new Dictionary<GameState, GameObject>();
+
 
     private void Awake()
     {
@@ -58,7 +60,7 @@ public class UIManager : MonoBehaviour
             case GameState.GameStart:
                 InGameUI.SetActive(true);
                 break;
-            case GameState.GameOver:
+            case GameState.GamePause:
                 GameOverUI.SetActive(true);
                 break;
             case GameState.GameClear:

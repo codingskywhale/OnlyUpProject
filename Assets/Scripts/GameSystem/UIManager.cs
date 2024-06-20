@@ -6,18 +6,11 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
-
-    // TODO : 추후 Dictionary 사용하여 관리토록 리팩토링
-    public GameObject GameOverUIPrefab;
-    public GameObject GameOverUI;
-
-    public GameObject GameClearUIPrefab;
-    public GameObject GameClearUI;
+    public GameObject GamePauseUIPrefab;
+    public GameObject GamePauseUI;
 
     public GameObject InGameUIPrefab;
     public GameObject InGameUI;
-
-    public Dictionary<GameState, GameObject> GameUI = new Dictionary<GameState, GameObject>();
 
 
     private void Awake()
@@ -35,37 +28,13 @@ public class UIManager : MonoBehaviour
             }
         }
 
-        if (GameOverUI == null)
+        if (GamePauseUI == null)
         {
-            GameOverUI = Instantiate(GameOverUIPrefab);
-        }
-        if (GameClearUI == null)
-        {
-            GameClearUI = Instantiate(GameClearUIPrefab);
+            GamePauseUI = Instantiate(GamePauseUIPrefab);
         }
         if (InGameUI == null)
         {
             InGameUI = Instantiate(InGameUIPrefab);
-        }
-    }
-
-    public void ActiveUI(GameState gameState)
-    {
-        switch (gameState)
-        {
-            case GameState.Intro:
-                //IntroUI.SetActive(true)
-                Debug.Log("인트로씬 UI");
-                break;
-            case GameState.GameStart:
-                InGameUI.SetActive(true);
-                break;
-            case GameState.GamePause:
-                GameOverUI.SetActive(true);
-                break;
-            case GameState.GameClear:
-                GameClearUI.SetActive(true);
-                break;
         }
     }
 }

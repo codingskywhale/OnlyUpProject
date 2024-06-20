@@ -99,12 +99,14 @@ public class GameManager : MonoBehaviour
         {
             case GameState.GameStart:
                 currentGameState = GameState.GamePause;
+                UIManager.Instance.GamePauseUI.SetActive(true);
                 break;
             case GameState.GamePause:
                 currentGameState = GameState.GameStart;
+                UIManager.Instance.GamePauseUI.SetActive(false);
                 break;
         }
-        //UIManager.Instance.ToggleUI(GameState.GamePause);
+        
     }
 
     

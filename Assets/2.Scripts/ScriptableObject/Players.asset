@@ -15,7 +15,7 @@ MonoBehaviour:
   <GroundData>k__BackingField:
     <BaseSpeed>k__BackingField: 5
     <BaseRotation>k__BackingField: 1
-    <WalkSpeedModifier>k__BackingField: 2
+    <WalkSpeedModifier>k__BackingField: 0.255
     <RunSpeedModifier>k__BackingField: 2
   <AirData>k__BackingField:
     <JumpForce>k__BackingField: 5

@@ -75,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    public void OnMove(InputAction.CallbackContext context)
+    public void OnMove_(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
         {
@@ -87,12 +87,12 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void OnLook(InputAction.CallbackContext context)
+    public void OnLook_(InputAction.CallbackContext context)
     {
         mouseDelta = context.ReadValue<Vector2>();
     }
 
-    public void OnJump(InputAction.CallbackContext context)
+    public void OnJump_(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Started && (IsGrounded()))
         {

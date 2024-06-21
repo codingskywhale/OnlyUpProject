@@ -39,7 +39,8 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Move();
+        bool isRunning = Input.GetKey(KeyCode.LeftShift);
+        Move(isRunning);
     }
 
     private void LateUpdate()
@@ -47,13 +48,20 @@ public class PlayerMovement : MonoBehaviour
          CameraLook();
     }
 
-    void Move()
+    void Move(bool isRunning)
     {
-        Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
-        dir *= moveSpeed;
-        dir.y = rigidbody.velocity.y;
+        float currentSpeed = moveSpeed;
 
-        rigidbody.velocity = dir;
+        if (isRunning)
+        {
+            currentSpeed *= 2;
+        }
+
+        Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
+        dir *= currentSpeed * Time.deltaTime;
+
+        Vector3 targetPosition = transform.position + dir;
+        rigidbody.MovePosition(targetPosition);
     }
 
     void CameraLook()

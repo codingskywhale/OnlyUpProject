@@ -719,6 +719,7 @@ GameObject:
   - component: {fileID: 5014105218426019795}
   - component: {fileID: 3894483443678978297}
   - component: {fileID: 877215643639197995}
+  - component: {fileID: 6257061832899743436}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Untagged
@@ -756,21 +757,14 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1441989594612332740}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 74dd0073f59d9b84f987845053fbb114, type: 3}
+  m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: f6028b2171097dc4c99df98e00c9f9aa, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftFoot'\n\tTransform
-    'mixamorig:LeftHandThumb2'\n\tTransform 'mixamorig:LeftHandIndex1'\n\tTransform
-    'mixamorig:LeftHandPinky2'\n\tTransform 'mixamorig:RightHandRing2'\n\tTransform
-    'mixamorig:Spine1'\n\tTransform 'mixamorig:LeftToeBase'\n\tTransform 'mixamorig:LeftHandThumb3'\n\tTransform
-    'mixamorig:RightArm'\n\tand more ...\n\tFrom animation clip 'Neutral Idle'\n\tFrom
-    animation clip 'Walking'\n\tFrom animation clip 'Fast Run'"
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -822,6 +816,7 @@ MonoBehaviour:
     airParameterName: '@Air'
     jumpParameterName: Jump
     fallParameterName: Fall
+  animator: {fileID: 4743874476899404565}
 --- !u!114 &877215643639197995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -834,6 +829,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef3a1ed806679c247bc3465cb8084bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6257061832899743436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441989594612332740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4097917fa75f4b1418cea4fc3d90a2c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterController: {fileID: 0}
 --- !u!1 &1515105025778062238
 GameObject:
   m_ObjectHideFlags: 0
@@ -3085,8 +3093,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8328479936948855469}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.964233, y: 32.533016, z: 36.234894}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.93, z: -1.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

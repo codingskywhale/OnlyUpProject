@@ -8,9 +8,10 @@ public class Player : MonoBehaviour
 
     [field:Header("Animations")]
     [field:SerializeField]public PlayerAnimationData animationData { get; private set; }
-    public Animator animator { get; private set; }
+    public Animator animator;
     public PlayerController controller { get; private set; }
     public CharacterController characterController { get; private set; }
+    public ForceReceiver forceReceiver { get; private set; }
     private PlayerStateMachine stateMachine;
     void Awake()
     {
@@ -19,6 +20,7 @@ public class Player : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         stateMachine = new PlayerStateMachine(this);
         stateMachine.ChangeState(stateMachine.playerIdleState);
+        forceReceiver = GetComponent<ForceReceiver>();
     }
 
     private void Start()

@@ -11,10 +11,15 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     private bool isGrounded;
 
+    AudioSource audioSource;
+    public AudioClip clip;
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -45,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            audioSource.PlayOneShot(clip);
         }
     }
 

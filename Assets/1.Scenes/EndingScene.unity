@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -222,7 +222,7 @@ Transform:
   m_GameObject: {fileID: 156023052}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.69873387, z: -0, w: 0.7153817}
-  m_LocalPosition: {x: 76.7, y: 6.5, z: 37.5}
+  m_LocalPosition: {x: 63.5, y: 6.5, z: 37.5}
   m_LocalScale: {x: 75.28, y: 15.08, z: 8.996}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -240,8 +240,9 @@ GameObject:
   - component: {fileID: 269085164}
   - component: {fileID: 269085163}
   - component: {fileID: 269085162}
+  - component: {fileID: 269085166}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -331,6 +332,19 @@ RectTransform:
   m_AnchoredPosition: {x: 960, y: 540}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &269085166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269085161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3619b3dca22bd0f4c8212fb5c41d13e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playTimeText: {fileID: 1559512772}
 --- !u!1 &1366908681
 GameObject:
   m_ObjectHideFlags: 0
@@ -551,7 +565,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -27.704, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -883.56, y: -535.8}
+  m_AnchoredPosition: {x: -885.2, y: -535.8}
   m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1559512772
@@ -574,7 +588,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Play Time \n00:00"
+  m_text: 'play time
+
+    00:00:00'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
@@ -731,7 +747,7 @@ GameObject:
   - component: {fileID: 1965646624}
   - component: {fileID: 1965646623}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Congratulations
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

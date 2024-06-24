@@ -35,12 +35,13 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     public Transform player;
 
+    private PlayerInput playerInput;
 
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
         rigidbody = GetComponent<Rigidbody>();
-
+        playerInput = GetComponent<PlayerInput>();
     }
 
     private void Start()
@@ -166,5 +167,24 @@ public class PlayerMovement : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    // 문병준 : 게임 일시정지 기능 구현 위해 아래 코드 및 상단의 PlayerInput playerInput 추가하였기에 주석 통해서 말씀드립니다.
+    // 이 글 확인 하셨으면 주석 지워주세요.
+    public void TogglePlayerInput()
+    {
+        bool toggle = GameManager.Instance.currentGameState == GameState.GamePause;
+        Cursor.visible = toggle ? true : false;
+        playerInput.enabled = toggle ? false : true;
+        ToggleCursor();
+    }
+
+
+
+    public void ToggleCursor()
+    {
+        bool toggle = Cursor.lockState == CursorLockMode.Locked;
+        Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
+        canLook = !toggle;
     }
 }

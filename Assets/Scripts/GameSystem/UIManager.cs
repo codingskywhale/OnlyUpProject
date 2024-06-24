@@ -9,10 +9,6 @@ public class UIManager : MonoBehaviour
     public GameObject GamePauseUIPrefab;
     public GameObject GamePauseUI;
 
-    public GameObject InGameUIPrefab;
-    public GameObject InGameUI;
-
-
     private void Awake()
     {
         if (Instance == null)
@@ -32,9 +28,7 @@ public class UIManager : MonoBehaviour
         {
             GamePauseUI = Instantiate(GamePauseUIPrefab);
         }
-        if (InGameUI == null)
-        {
-            InGameUI = Instantiate(InGameUIPrefab);
-        }
     }
+
+
 }

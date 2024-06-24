@@ -2,20 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public enum GameState
 {
     Intro,
     GameStart,
-    GameOver,
+    GamePause,
     GameClear
 }
 
-public enum GameStage
-{
-    Stage1,
-    Stage2
-}
 
 public class GameManager : MonoBehaviour
 {
@@ -33,11 +29,11 @@ public class GameManager : MonoBehaviour
     }
 
     public GameState currentGameState { get; private set; }
-    public GameStage currentStage { get; private set; }
-    public void SetStage(GameStage newStage)
-    {
-        currentStage = newStage;
-    }
+
+    bool isPlaying;
+
+    public Text playTimeText;
+    private float playTime = 0f;
 
     //public Player player;
 
@@ -48,8 +44,9 @@ public class GameManager : MonoBehaviour
             _Instance = this;
 
             Application.targetFrameRate = 60;
-            currentGameState = GameState.Intro;
-            currentStage = GameStage.Stage1;
+            // TODO : 테스트용으로 Start 상태에서 시작. 추후 인트로씬 만들면 intro에서 시작토록
+            //currentGameState = GameState.Intro;
+            currentGameState = GameState.GameStart;
 
             DontDestroyOnLoad(gameObject);
         }
@@ -60,10 +57,17 @@ public class GameManager : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+    }
 
-        if(currentGameState == GameState.GameStart)
+    private void Update()
+    {
+        if(currentGameState == GameState.GamePause)
         {
-            GameStartState();
+            playTime += Time.deltaTime;
+            if (playTimeText != null)
+            {
+                playTimeText.text = TimerFormat();
+            }
         }
     }
 
@@ -79,7 +83,7 @@ public class GameManager : MonoBehaviour
     public void GameStartState()
     {
         currentGameState = GameState.GameStart;
-        UIManager.Instance.ActiveUI(GameState.GameStart);
+        //UIManager.Instance.ActiveUI(GameState.GameStart);
     }
 
     public void GameStart()
@@ -88,63 +92,49 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
-    // State : 게임 오버
-    public void GameOver()
+    public void GamePause()
     {
-        currentGameState = GameState.GameOver;
-        //player.controller.DisablePlayerInput();
-        UIManager.Instance.ActiveUI(GameState.GameOver);
-
+        
+        switch (currentGameState)
+        {
+            case GameState.GameStart:
+                currentGameState = GameState.GamePause;
+                UIManager.Instance.GamePauseUI.SetActive(true);
+                break;
+            case GameState.GamePause:
+                currentGameState = GameState.GameStart;
+                UIManager.Instance.GamePauseUI.SetActive(false);
+                break;
+        }
+        
     }
+
+    
 
     // State : 게임 클리어
     public void GameClear()
     {
         currentGameState = GameState.GameClear;
-        //player.controller.DisablePlayerInput();
-        UIManager.Instance.ActiveUI(GameState.GameClear);
+        // TODO : 나중에 buildindex로 수정
+        SceneManager.LoadScene("ClearScene");
+        //SceneManager.LoadScene(2);
     }
 
     public void Restart()
     {
         currentGameState = GameState.GameStart;
+        // TODO : 나중에 buildindex로 수정
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    /* 
-     * TODO :
-     * 스테이지 1개로 바뀌었으므로 아래 코드들 미사용
-     * 추후 리팩토링하여 스테이지 추가로 만들 경우 사용예정
-     */
-
-    public void StageSelect(GameStage newStage)
+    public string TimerFormat()
     {
-        currentStage = newStage;
-        currentGameState = GameState.GameStart;
+        int intPlayTime = (int)playTime;
+        string hour = (intPlayTime / 3600).ToString("D2");
+        string minute = ((intPlayTime % 3600) / 60).ToString("D2");
+        string second = (intPlayTime % 60).ToString("D2");
 
-        int buildIndexOfStage1 = 1;
-        int newStageIndex = buildIndexOfStage1 + (int)currentStage;
-        SceneManager.LoadScene(newStageIndex);
-    }
-
-    public void NextStage()
-    {
-
-        Debug.Log("NextStage!");
-
-        int currentIndex = (int)currentStage;
-        int lastStageIndex = GameStage.GetValues(typeof(GameStage)).Length - 1;
-        if (currentIndex == lastStageIndex)
-        {
-            Debug.Log("현재 마지막 스테이지이므로 다음 스테이지는 없습니다!!");
-        }
-        else
-        {
-            currentGameState = GameState.GameStart;
-            currentStage++;
-            int buildIndexOfStage1 = 1;
-            int nextStageIndex = buildIndexOfStage1 + currentIndex;
-            SceneManager.LoadScene(nextStageIndex);
-        }
+        return $"{hour}:{minute}:{second}";
     }
 }

@@ -129,14 +129,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void OnHanging_(InputAction.CallbackContext context)
-    {
-        if (context.phase == InputActionPhase.Started && (IsHanging()))
-        {
-            animator.SetBool("Hanging", true);
-            
-        }
-    }
 
     bool IsGrounded()
     {
@@ -158,30 +150,13 @@ public class PlayerMovement : MonoBehaviour
         return false;
     }
 
-    bool IsHanging()
+    public bool IsHanging()
     {
-        Vector3 headDirection = player.transform.up + transform.forward * 0.2f;
 
-        Ray[] rays = new Ray[4]
+        RaycastHit hitInfo;
+        if (Physics.Raycast(transform.position + transform.forward * 0.2f + transform.up * 0.01f, transform.forward, out hitInfo, 1f, groundLayerMask))
         {
-        new Ray(transform.position + headDirection, Vector3.down),
-        new Ray(transform.position - headDirection, Vector3.down),
-        new Ray(transform.position + transform.right * 0.2f, Vector3.down),
-        new Ray(transform.position - transform.right * 0.2f, Vector3.down)
-        };
-        for (int i = 0; i < rays.Length; i++)
-        {
-            RaycastHit hitInfo;
-            bool isHit = Physics.Raycast(rays[i], out hitInfo, 1f, groundLayerMask);
-
-
-            Color rayColor = isHit ? Color.green : Color.red; 
-            Debug.DrawRay(rays[i].origin, rays[i].direction * 1f, rayColor);
-
-            if (isHit)
-            {
-                return true;
-            }
+            return true;
         }
         return false;
     }

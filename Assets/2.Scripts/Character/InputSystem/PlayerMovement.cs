@@ -69,27 +69,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void LateUpdate()
     {
-         CameraLook();
-        Vector3 headDirection = player.transform.up + transform.forward * 0.2f;
-
-        Ray[] rays = new Ray[4]
-        {
-        new Ray(transform.position + headDirection, Vector3.down),
-        new Ray(transform.position - headDirection, Vector3.down),
-        new Ray(transform.position + transform.right * 0.2f, Vector3.down),
-        new Ray(transform.position - transform.right * 0.2f, Vector3.down)
-        };
-        for (int i = 0; i < rays.Length; i++)
-        {
-            RaycastHit hitInfo;
-            bool isHit = Physics.Raycast(rays[i], out hitInfo, 1f, groundLayerMask);
-
-            // 레이를 시각적으로 표시합니다.
-            Color rayColor = isHit ? Color.green : Color.red; // 충돌 여부에 따라 색상 설정
-            Debug.DrawRay(rays[i].origin, rays[i].direction * 1f, rayColor);
-
-            // 충돌한 경우 true 반환
-        }
+         CameraLook();       
     }
 
     void Move(bool isRunning)
@@ -194,11 +174,10 @@ public class PlayerMovement : MonoBehaviour
             RaycastHit hitInfo;
             bool isHit = Physics.Raycast(rays[i], out hitInfo, 1f, groundLayerMask);
 
-            // 레이를 시각적으로 표시합니다.
-            Color rayColor = isHit ? Color.green : Color.red; // 충돌 여부에 따라 색상 설정
+
+            Color rayColor = isHit ? Color.green : Color.red; 
             Debug.DrawRay(rays[i].origin, rays[i].direction * 1f, rayColor);
 
-            // 충돌한 경우 true 반환
             if (isHit)
             {
                 return true;

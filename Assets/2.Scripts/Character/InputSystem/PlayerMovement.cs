@@ -142,7 +142,7 @@ public class PlayerMovement : MonoBehaviour
 
         for (int i = 0; i < rays.Length; i++)
         {
-            if (Physics.Raycast(rays[i], 1f, groundLayerMask))
+            if (Physics.Raycast(rays[i], 0.5f, groundLayerMask))
             {
                 return true;
             }
@@ -152,9 +152,16 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsHanging()
     {
+        float hangingDetectionDistance = 0.6f;
+        float headDetectionHeight = 1.5f;
+        Vector3 playerPosition = player.position;
+        Vector3 headPosition = playerPosition + Vector3.up * headDetectionHeight;
 
         RaycastHit hitInfo;
-        if (Physics.Raycast(transform.position + transform.forward * 0.2f + transform.up * 0.01f, transform.forward, out hitInfo, 1f, groundLayerMask))
+        bool headHit = Physics.Raycast(headPosition, player.forward, out hitInfo, hangingDetectionDistance, groundLayerMask);
+        bool wallHit = Physics.Raycast(playerPosition, player.forward, out hitInfo, hangingDetectionDistance, groundLayerMask);
+
+        if (wallHit && headHit)
         {
             return true;
         }

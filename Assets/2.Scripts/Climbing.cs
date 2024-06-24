@@ -13,14 +13,14 @@ public class Climbing : MonoBehaviour
     [Header("Climbing")]
     public float climbSpeed;
     public float maxClimbTime;
-    private float climbTime;
+    public float climbTime;
 
     private bool climbing;
     private bool climbingCoolTime;
 
     [Header("Cooldown")]
     public float climbCooldown;
-    private float climbCooldownTimer;
+    public float climbCooldownTimer;
 
     [Header("Dection")]
     public float detectionLength;
@@ -45,7 +45,7 @@ public class Climbing : MonoBehaviour
         StateMachine();
         if (climbing) ClimbingMovement();
     }
-        public void StateMachine()
+    public void StateMachine()
     {
         if (climbingCoolTime)
         {

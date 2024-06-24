@@ -35,11 +35,16 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     public Transform player;
 
+    [Header("Sound")]
+    AudioSource audioSource;
+    public AudioClip clip;
+
 
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
         rigidbody = GetComponent<Rigidbody>();
+        audioSource = GetComponentInChildren<AudioSource>();
 
     }
 
@@ -126,6 +131,7 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("Jump", true);
             rigidbody.AddForce(Vector2.up * (jumpPower), ForceMode.Impulse);
+            audioSource.PlayOneShot(clip);
         }
     }
 

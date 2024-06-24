@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bf872a9190cf0be4089be331c994911d
+guid: 26c8b74b794ea964cb7d51b63bf0e7ff
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -28,22 +28,22 @@ ModelImporter:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Boy01_FacialAnimMap
-    second: {fileID: 2800000, guid: d90431fd34cfd5642af285981b60c13c, type: 3}
+    second: {fileID: 2800000, guid: 61770b23d98d636429b878e24677aab2, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Boy01_diffuse
-    second: {fileID: 2800000, guid: 191736a31acf84144bc62ec9b000848f, type: 3}
+    second: {fileID: 2800000, guid: 82a6a627c2d9b3e4482447d390cc451d, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Boy01_normal
-    second: {fileID: 2800000, guid: 6d6c328649b87644ab4149cea5161b5f, type: 3}
+    second: {fileID: 2800000, guid: aaee716428538e1418653cb0317e4529, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Boy01_spec
-    second: {fileID: 2800000, guid: bb021e4afb52b99499908f53334c46c3, type: 3}
+    second: {fileID: 2800000, guid: c678278b2c6ed414b95e1ac2fd16b691, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -71,7 +71,36 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Walk
+      takeName: mixamo.com
+      internalID: -203655887218126122
+      firstFrame: 0
+      lastFrame: 31
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []

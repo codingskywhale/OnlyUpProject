@@ -8,42 +8,42 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Boy01_Body_MAT1
-    second: {fileID: 2100000, guid: 370b5ae2f5383f54dbac73df0dfca0d0, type: 2}
+    second: {fileID: 2100000, guid: 02cc0ff0e4bb5a740a197d79078da646, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Boy01_Brows_MAT2
-    second: {fileID: 2100000, guid: 93d5109c0353b754dbebca933fd426ca, type: 2}
+    second: {fileID: 2100000, guid: 4646a95a8d54c3e45bf9840b7d115b3a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Boy01_Eyes_MAT2
-    second: {fileID: 2100000, guid: ab9cda853cd5b57438b2f1870822649c, type: 2}
+    second: {fileID: 2100000, guid: d453ed74b1dc0ee4bb5cfcf23b87d8e3, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Boy01_Mouth_MAT2
-    second: {fileID: 2100000, guid: 562ff38f81700c84e9105785575ba892, type: 2}
+    second: {fileID: 2100000, guid: c3071df9d325b294796db2ed33341f0b, type: 2}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Boy01_FacialAnimMap
-    second: {fileID: 2800000, guid: f44dc9ee8a1ccf64c99100c536c51b51, type: 3}
+    second: {fileID: 2800000, guid: 46b3093413ffe4c43b6a3adb87f04f16, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Boy01_diffuse
-    second: {fileID: 2800000, guid: 1bea3ca90a894a34e911eefacb0bc9c2, type: 3}
+    second: {fileID: 2800000, guid: 47d58f696a6f3d14da08dd3495edd3cb, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Boy01_normal
-    second: {fileID: 2800000, guid: 7e53b0a3fafd2e1419ce1709ea5c1018, type: 3}
+    second: {fileID: 2800000, guid: 599b11f4494170f4daef700322d4660f, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Boy01_spec
-    second: {fileID: 2800000, guid: 9e2229ea7a59ff145a91c88310cda44b, type: 3}
+    second: {fileID: 2800000, guid: 5cf5ecd6187b25e448c9c766bae060fe, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -71,7 +71,36 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Run
+      takeName: mixamo.com
+      internalID: -203655887218126122
+      firstFrame: 0
+      lastFrame: 19
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []

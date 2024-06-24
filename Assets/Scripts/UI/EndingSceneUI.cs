@@ -11,5 +11,6 @@ public class EndingSceneUI : MonoBehaviour
     void Start()
     {
         playTimeText.text = "Play Time: \n" + GameManager.Instance.TimerFormat();
+        AudioManager.Instance.PlayEndingBGM();
     }
 }

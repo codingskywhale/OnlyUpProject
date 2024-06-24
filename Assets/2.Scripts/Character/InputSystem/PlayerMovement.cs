@@ -152,8 +152,8 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsHanging()
     {
-        float hangingDetectionDistance = 0.6f;
-        float headDetectionHeight = 1.5f;
+        float hangingDetectionDistance = 0.9f;
+        float headDetectionHeight = 0.5f;
         Vector3 playerPosition = player.position;
         Vector3 headPosition = playerPosition + Vector3.up * headDetectionHeight;
 

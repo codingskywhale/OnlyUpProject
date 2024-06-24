@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public class Spike : DamageObject, ITriggerable
 {
@@ -19,7 +20,7 @@ public class Spike : DamageObject, ITriggerable
 
     void LaunchSpike()
     {
-        transform.position += transform.forward * moveSpeed * Time.deltaTime;
+        transform.position += transform.up * moveSpeed * Time.deltaTime;
     }
 
     public void Trigger()

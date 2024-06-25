@@ -227,4 +227,12 @@ public class PlayerMovement : MonoBehaviour
         Ray wallHitRay = new Ray(playerHead, dir);
         return Physics.Raycast(wallHitRay, 0.3f , groundLayerMask);
     }
+
+    public void OnGamePause(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            GameManager.Instance.GamePause();
+        }   
+    }
 }

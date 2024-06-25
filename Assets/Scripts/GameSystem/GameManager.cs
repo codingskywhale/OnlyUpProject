@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     public GameState currentGameState { get; private set; }
 
     private float playTime = 0f;
-    
+
 
     public Player_tmp player;
 
@@ -46,12 +46,8 @@ public class GameManager : MonoBehaviour
         if (_Instance == null)
         {
             _Instance = this;
-
             Application.targetFrameRate = 60;
-            // TODO : 테스트용으로 Start 상태에서 시작. 추후 인트로씬 만들면 intro에서 시작토록
             currentGameState = GameState.Intro;
-            //currentGameState = GameState.GameStart;
-
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -65,7 +61,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(currentGameState == GameState.GameStart)
+        if (currentGameState == GameState.GameStart)
         {
             playTime += Time.deltaTime;
         }
@@ -90,7 +86,6 @@ public class GameManager : MonoBehaviour
     {
         if (currentGameState == GameState.GameStart)
         {
-            Debug.Log("GamePause");
             currentGameState = GameState.GamePause;
             player.movementController.TogglePlayerInput();
             UIManager.Instance.GamePauseUI.SetActive(true);
@@ -102,26 +97,23 @@ public class GameManager : MonoBehaviour
         if (currentGameState == GameState.GamePause)
         {
             currentGameState = GameState.GameStart;
-            player.movementController?.TogglePlayerInput();
+            player.movementController.TogglePlayerInput();
             UIManager.Instance.GamePauseUI.SetActive(false);
         }
     }
-   
+
 
     // State : 게임 클리어
     public void GameClear()
     {
         currentGameState = GameState.GameClear;
-        //SceneManager.LoadScene("EndingScene");
         SceneManager.LoadScene(2);
     }
 
     public void Restart()
     {
         currentGameState = GameState.GameStart;
-        // TODO : 나중에 buildindex로 수정
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public float GetPlayTime()

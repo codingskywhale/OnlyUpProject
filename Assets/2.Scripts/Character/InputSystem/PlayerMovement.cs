@@ -74,7 +74,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void LateUpdate()
     {
-         CameraLook();       
+        CheckFall();
+        CameraLook();       
     }
 
     void Move(bool isRunning)
@@ -144,13 +145,27 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-
     public void ToggleCursor()
     {
         bool toggle = Cursor.lockState == CursorLockMode.Locked;
         Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
         canLook = !toggle;
     }
+
+    private void CheckFall()
+    {
+        Rigidbody rb = GetComponentInChildren<Rigidbody>();
+        float fallChangeSpeed = -15.0f;
+        if (rb.velocity.y < fallChangeSpeed)
+        {
+            animator.SetBool("Fall", true);
+        }
+        else
+        {
+            animator.SetBool("Fall", false);
+        }
+    }
+
     bool IsGrounded()
     {
         Ray[] rays = new Ray[4]

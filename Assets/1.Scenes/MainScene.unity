@@ -22923,7 +22923,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e894f3bc82c7444b9d11fe854d9e3f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scenename: EndingScene
 --- !u!136 &1802634060
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -22939,7 +22938,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2

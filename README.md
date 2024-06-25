@@ -65,12 +65,12 @@
 - 트리거 발판
   일부 발판은 건들면 함정이 발동된다.
 
-## 사용 에셋
-# 폰트
+# 사용 에셋
+## 폰트
 https://ggbot.itch.io/pinzelan-font
-# 캐릭터
+## 캐릭터
 https://assetstore.unity.com/packages/3d/characters/humanoids/character-elf-114445
-# 오브젝트
+## 오브젝트
 폐허: https://assetstore.unity.com/packages/3d/environments/ruins-creation-kit-2235  
 식물: https://assetstore.unity.com/packages/3d/vegetation/plants/yughues-free-bushes-13168  
 신전: https://assetstore.unity.com/packages/3d/environments/historic/ancient-temple-2-74766  
@@ -79,9 +79,9 @@ https://assetstore.unity.com/packages/3d/characters/humanoids/character-elf-1144
 그리스 건축: https://assetstore.unity.com/packages/3d/environments/historic/greek-low-poly-pack-lite-136606  
 석상: https://assetstore.unity.com/packages/3d/props/discobolus-statue-107544  
 표지판: https://assetstore.unity.com/packages/3d/environments/low-poly-woods-lifestyle-65306
-# UI
+## UI
 https://assetstore.unity.com/packages/2d/gui/fantasy-wooden-gui-free-103811
-# 이펙트
+## 이펙트
 https://assetstore.unity.com/packages/vfx/particles/fire-effect-vol-1-131886
-# 텍스쳐
+## 텍스쳐
 https://assetstore.unity.com/packages/2d/textures-materials/floors/outdoor-ground-textures-12555

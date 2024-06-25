@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8783857939523044164}
   - component: {fileID: 4109154544733099675}
-  - component: {fileID: 5194518325626553984}
+  - component: {fileID: 8401894672336476851}
   m_Layer: 0
   m_Name: Potal
   m_TagString: Untagged
@@ -55,7 +55,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5194518325626553984
+--- !u!114 &8401894672336476851
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -67,7 +67,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e894f3bc82c7444b9d11fe854d9e3f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scenename: EndingScene
 --- !u!1 &3927872665124112485
 GameObject:
   m_ObjectHideFlags: 0

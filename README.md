@@ -22,8 +22,9 @@
 부디 제 2의 프로메테우스가 되어 다시 한번 인간들에게 불을 가져다 주세요!
 
 # 목차
--[멤버 구성](#멤버-구성)
--[게임 진행 방식](#게임-진행-방식)
+- [멤버 구성](#멤버-구성)
+- [게임 진행 방식](#게임-진행-방식)
+- [이펙트](#이펙트)
 
 # 멤버 구성
 - 문병준
@@ -63,3 +64,23 @@
   일부 발판에서는 점프를 할 수 없다.
 - 트리거 발판
   일부 발판은 건들면 함정이 발동된다.
+
+## 사용 에셋
+# 폰트
+https://ggbot.itch.io/pinzelan-font
+# 캐릭터
+https://assetstore.unity.com/packages/3d/characters/humanoids/character-elf-114445
+# 오브젝트
+폐허: https://assetstore.unity.com/packages/3d/environments/ruins-creation-kit-2235  
+식물: https://assetstore.unity.com/packages/3d/vegetation/plants/yughues-free-bushes-13168  
+신전: https://assetstore.unity.com/packages/3d/environments/historic/ancient-temple-2-74766  
+돌1: https://assetstore.unity.com/packages/3d/environments/landscapes/rock-pack-210536#content  
+돌2: https://assetstore.unity.com/packages/3d/environments/landscapes/photoreal-stones-pack-demo-70005  
+그리스 건축: https://assetstore.unity.com/packages/3d/environments/historic/greek-low-poly-pack-lite-136606  
+석상: https://assetstore.unity.com/packages/3d/props/discobolus-statue-107544
+# UI
+https://assetstore.unity.com/packages/2d/gui/fantasy-wooden-gui-free-103811
+# 이펙트
+https://assetstore.unity.com/packages/vfx/particles/fire-effect-vol-1-131886
+# 텍스쳐
+https://assetstore.unity.com/packages/2d/textures-materials/floors/outdoor-ground-textures-12555

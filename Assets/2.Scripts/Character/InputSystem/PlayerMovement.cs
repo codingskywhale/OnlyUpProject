@@ -94,7 +94,10 @@ public class PlayerMovement : MonoBehaviour
         Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
         dir *= currentSpeed * Time.deltaTime;
         Vector3 targetPosition = transform.position + dir;
-        rigidbody.MovePosition(targetPosition);
+        if (!WallHit(dir))
+        {
+            rigidbody.MovePosition(targetPosition);
+        }
     }
 
     void CameraLook()
@@ -215,5 +218,13 @@ public class PlayerMovement : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public bool WallHit(Vector3 dir)
+    {
+        Vector3 playerHead = transform.position;
+        playerHead.y += 1f;
+        Ray wallHitRay = new Ray(playerHead, dir);
+        return Physics.Raycast(wallHitRay, 0.3f , groundLayerMask);
     }
 }

@@ -30,12 +30,10 @@ public class GameManager : MonoBehaviour
 
     public GameState currentGameState { get; private set; }
 
-    bool isPlaying;
-
-    public Text playTimeText;
     private float playTime = 0f;
+    
 
-    //public Player player;
+    public Player_tmp player;
 
     private void Awake()
     {
@@ -45,8 +43,8 @@ public class GameManager : MonoBehaviour
 
             Application.targetFrameRate = 60;
             // TODO : 테스트용으로 Start 상태에서 시작. 추후 인트로씬 만들면 intro에서 시작토록
-            //currentGameState = GameState.Intro;
-            currentGameState = GameState.GameStart;
+            currentGameState = GameState.Intro;
+            //currentGameState = GameState.GameStart;
 
             DontDestroyOnLoad(gameObject);
         }
@@ -61,13 +59,9 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(currentGameState == GameState.GamePause)
+        if(currentGameState == GameState.GameStart)
         {
             playTime += Time.deltaTime;
-            if (playTimeText != null)
-            {
-                playTimeText.text = TimerFormat();
-            }
         }
     }
 
@@ -79,12 +73,6 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    // State : 게임 시작
-    public void GameStartState()
-    {
-        currentGameState = GameState.GameStart;
-        //UIManager.Instance.ActiveUI(GameState.GameStart);
-    }
 
     public void GameStart()
     {
@@ -94,30 +82,32 @@ public class GameManager : MonoBehaviour
 
     public void GamePause()
     {
-        
-        switch (currentGameState)
+        if (currentGameState == GameState.GameStart)
         {
-            case GameState.GameStart:
-                currentGameState = GameState.GamePause;
-                UIManager.Instance.GamePauseUI.SetActive(true);
-                break;
-            case GameState.GamePause:
-                currentGameState = GameState.GameStart;
-                UIManager.Instance.GamePauseUI.SetActive(false);
-                break;
+            Debug.Log("GamePause");
+            currentGameState = GameState.GamePause;
+            player.movementController.TogglePlayerInput();
+            UIManager.Instance.GamePauseUI.SetActive(true);
         }
-        
     }
 
-    
+    public void GameResume()
+    {
+        if (currentGameState == GameState.GamePause)
+        {
+            currentGameState = GameState.GameStart;
+            player.movementController?.TogglePlayerInput();
+            UIManager.Instance.GamePauseUI.SetActive(false);
+        }
+    }
+   
 
     // State : 게임 클리어
     public void GameClear()
     {
         currentGameState = GameState.GameClear;
-        // TODO : 나중에 buildindex로 수정
-        SceneManager.LoadScene("ClearScene");
-        //SceneManager.LoadScene(2);
+        //SceneManager.LoadScene("EndingScene");
+        SceneManager.LoadScene(2);
     }
 
     public void Restart()
@@ -128,13 +118,22 @@ public class GameManager : MonoBehaviour
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public float GetPlayTime()
+    {
+        return playTime;
+    }
+
     public string TimerFormat()
     {
+        string result;
+
         int intPlayTime = (int)playTime;
         string hour = (intPlayTime / 3600).ToString("D2");
         string minute = ((intPlayTime % 3600) / 60).ToString("D2");
         string second = (intPlayTime % 60).ToString("D2");
 
-        return $"{hour}:{minute}:{second}";
+        result = $"{hour}:{minute}:{second}";
+        return result;
     }
+
 }

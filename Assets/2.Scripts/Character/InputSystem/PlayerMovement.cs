@@ -39,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
     AudioSource audioSource;
     public AudioClip clip;
 
+    private PlayerInput playerInput;
 
     private void Awake()
     {
@@ -46,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         audioSource = GetComponentInChildren<AudioSource>();
 
+        playerInput = GetComponent<PlayerInput>();
     }
 
     private void Start()
@@ -172,5 +174,22 @@ public class PlayerMovement : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public void TogglePlayerInput()
+    {
+        bool toggle = GameManager.Instance.currentGameState == GameState.GamePause;
+        Cursor.visible = toggle ? true : false;
+        playerInput.enabled = toggle ? false : true;
+        ToggleCursor();
+    }
+
+
+
+    public void ToggleCursor()
+    {
+        bool toggle = Cursor.lockState == CursorLockMode.Locked;
+        Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
+        canLook = !toggle;
     }
 }

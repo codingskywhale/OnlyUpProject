@@ -1,20 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class UIPause : UIBase
 {
-    [SerializeField] private Text playTimeText;
+    [SerializeField] private TMP_Text playTimeText;
 
-    private void Awake()
+    bool tmp_isInitialized = false; //
+
+    private void Start()
     {
-        playTimeText = GetComponent<Text>();
-        playTimeText.text = GameManager.Instance.TimerFormat();
+        UIManager.Instance.GamePauseUI = gameObject;
+        SetActive(false);
+        
     }
 
     private void OnEnable()
     {
+        if (tmp_isInitialized == true) GameManager.Instance.GamePause();// TODO : 테스트용 코드이므로 추후에 이 코드 삭제할 것.}
+        
         playTimeText.text = GameManager.Instance.TimerFormat();
+        tmp_isInitialized = true; //
     }
 }

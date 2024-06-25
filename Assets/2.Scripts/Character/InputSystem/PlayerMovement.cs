@@ -35,12 +35,18 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     public Transform player;
 
+    [Header("Sound")]
+    AudioSource audioSource;
+    public AudioClip clip;
+
     private PlayerInput playerInput;
 
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
         rigidbody = GetComponent<Rigidbody>();
+        audioSource = GetComponentInChildren<AudioSource>();
+
         playerInput = GetComponent<PlayerInput>();
     }
 
@@ -127,6 +133,7 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("Jump", true);
             rigidbody.AddForce(Vector2.up * (jumpPower), ForceMode.Impulse);
+            audioSource.PlayOneShot(clip);
         }
     }
 
@@ -153,8 +160,8 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsHanging()
     {
-        float hangingDetectionDistance = 0.6f;
-        float headDetectionHeight = 1.5f;
+        float hangingDetectionDistance = 0.9f;
+        float headDetectionHeight = 0.5f;
         Vector3 playerPosition = player.position;
         Vector3 headPosition = playerPosition + Vector3.up * headDetectionHeight;
 
@@ -169,8 +176,6 @@ public class PlayerMovement : MonoBehaviour
         return false;
     }
 
-    // 문병준 : 게임 일시정지 기능 구현 위해 아래 코드 및 상단의 PlayerInput playerInput 추가하였기에 주석 통해서 말씀드립니다.
-    // 이 글 확인 하셨으면 주석 지워주세요.
     public void TogglePlayerInput()
     {
         bool toggle = GameManager.Instance.currentGameState == GameState.GamePause;

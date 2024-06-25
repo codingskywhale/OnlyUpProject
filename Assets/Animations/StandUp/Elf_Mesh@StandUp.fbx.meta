@@ -62,7 +62,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 1
+      - time: 0.67465174
         functionName: StandSetBool
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 861ed1c6a80771346952fa433c00a3e1, type: 3}

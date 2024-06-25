@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -23,12 +25,21 @@ public class UIManager : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+        
+    }
 
-        if ( (GameManager.Instance.currentGameState == GameState.GameStart) && GamePauseUI == null)
+    private void Start()
+    {
+        SceneManager.sceneLoaded += OnSceneLoad;
+    }
+
+
+    private void OnSceneLoad(Scene arg0, LoadSceneMode arg1)
+    {
+        GamePauseUI = null;
+        if (GameManager.Instance.currentGameState != GameState.Intro)
         {
             GamePauseUI = Instantiate(GamePauseUIPrefab);
         }
     }
-
-
 }

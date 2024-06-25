@@ -8,8 +8,13 @@ public enum GameState
 {
     Intro,
     GameStart,
-    GamePause,
     GameClear
+}
+
+public enum GameMode
+{
+    Single,
+    Multi
 }
 
 
@@ -31,7 +36,7 @@ public class GameManager : MonoBehaviour
     public GameState currentGameState { get; private set; }
 
     private float playTime = 0f;
-    
+    public bool IsGamePause { get; private set; } = false;
 
     public Player_tmp player;
 
@@ -40,12 +45,8 @@ public class GameManager : MonoBehaviour
         if (_Instance == null)
         {
             _Instance = this;
-
             Application.targetFrameRate = 60;
-            // TODO : 테스트용으로 Start 상태에서 시작. 추후 인트로씬 만들면 intro에서 시작토록
             currentGameState = GameState.Intro;
-            //currentGameState = GameState.GameStart;
-
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -59,7 +60,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(currentGameState == GameState.GameStart)
+        if (currentGameState == GameState.GameStart && IsGamePause == false)
         {
             playTime += Time.deltaTime;
         }
@@ -82,10 +83,9 @@ public class GameManager : MonoBehaviour
 
     public void GamePause()
     {
-        if (currentGameState == GameState.GameStart)
+        if (IsGamePause == false)
         {
-            Debug.Log("GamePause");
-            currentGameState = GameState.GamePause;
+            IsGamePause = true;
             player.movementController.TogglePlayerInput();
             UIManager.Instance.GamePauseUI.SetActive(true);
         }
@@ -93,29 +93,26 @@ public class GameManager : MonoBehaviour
 
     public void GameResume()
     {
-        if (currentGameState == GameState.GamePause)
+        if (IsGamePause == true)
         {
-            currentGameState = GameState.GameStart;
-            player.movementController?.TogglePlayerInput();
+            IsGamePause = false;
+            player.movementController.TogglePlayerInput();
             UIManager.Instance.GamePauseUI.SetActive(false);
         }
     }
-   
+
 
     // State : 게임 클리어
     public void GameClear()
     {
         currentGameState = GameState.GameClear;
-        //SceneManager.LoadScene("EndingScene");
         SceneManager.LoadScene(2);
     }
 
     public void Restart()
     {
         currentGameState = GameState.GameStart;
-        // TODO : 나중에 buildindex로 수정
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public float GetPlayTime()

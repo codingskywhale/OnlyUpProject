@@ -142,7 +142,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void TogglePlayerInput()
     {
-        bool toggle = GameManager.Instance.currentGameState == GameState.GamePause;
+        bool toggle = GameManager.Instance.IsGamePause;
         Cursor.visible = toggle ? true : false;
         playerInput.enabled = toggle ? false : true;
         ToggleCursor();
@@ -226,5 +226,13 @@ public class PlayerMovement : MonoBehaviour
         playerHead.y += 1f;
         Ray wallHitRay = new Ray(playerHead, dir);
         return Physics.Raycast(wallHitRay, 0.3f , groundLayerMask);
+    }
+
+    public void OnGamePause(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            GameManager.Instance.GamePause();
+        }   
     }
 }

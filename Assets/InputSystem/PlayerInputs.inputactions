@@ -51,9 +51,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Hanging",
+                    "name": "GamePause",
                     "type": "Button",
-                    "id": "30c311e8-60be-4483-b7bd-7791b951a409",
+                    "id": "99964f66-b04d-4119-be92-9a14d2e0731e",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -162,12 +162,12 @@
                 },
                 {
                     "name": "",
-                    "id": "5cd645cf-3fa4-4a3f-b396-e7375ff4dd18",
-                    "path": "<Keyboard>/r",
+                    "id": "e95f4833-c6d5-4408-a9ef-4e5cfcd8e8c6",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Hanging",
+                    "action": "GamePause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

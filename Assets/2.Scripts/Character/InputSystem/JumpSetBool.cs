@@ -15,4 +15,9 @@ public class NewBehaviourScript : MonoBehaviour
     {
         animator.SetBool("Jump", false);
     }
+
+    public void StandSetBool()
+    {
+        animator.SetBool("StandUp", false);
+    }
 }

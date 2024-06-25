@@ -40,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip clip;
 
     private PlayerInput playerInput;
+    private bool fallingCheck = false;
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
@@ -159,12 +160,24 @@ public class PlayerMovement : MonoBehaviour
         if (rb.velocity.y < fallChangeSpeed)
         {
             animator.SetBool("Fall", true);
+            fallingCheck = true;
         }
         else
         {
+            StandUp();
             animator.SetBool("Fall", false);
         }
     }
+
+    private void StandUp()
+    {
+        if (fallingCheck)
+        {
+            animator.SetBool("StandUp",true);
+            fallingCheck = false;
+        }
+    }
+
 
     bool IsGrounded()
     {

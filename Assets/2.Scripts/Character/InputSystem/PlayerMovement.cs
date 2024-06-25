@@ -40,13 +40,12 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip clip;
 
     private PlayerInput playerInput;
-
+    private bool fallingCheck = false;
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
         rigidbody = GetComponent<Rigidbody>();
         audioSource = GetComponentInChildren<AudioSource>();
-
         playerInput = GetComponent<PlayerInput>();
     }
 
@@ -76,7 +75,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void LateUpdate()
     {
-         CameraLook();       
+        CheckFall();
+        CameraLook();       
     }
 
     void Move(bool isRunning)
@@ -94,7 +94,10 @@ public class PlayerMovement : MonoBehaviour
         Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
         dir *= currentSpeed * Time.deltaTime;
         Vector3 targetPosition = transform.position + dir;
-        rigidbody.MovePosition(targetPosition);
+        if (!WallHit(dir))
+        {
+            rigidbody.MovePosition(targetPosition);
+        }
     }
 
     void CameraLook()
@@ -137,6 +140,47 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void TogglePlayerInput()
+    {
+        bool toggle = GameManager.Instance.currentGameState == GameState.GamePause;
+        Cursor.visible = toggle ? true : false;
+        playerInput.enabled = toggle ? false : true;
+        ToggleCursor();
+    }
+
+
+    public void ToggleCursor()
+    {
+        bool toggle = Cursor.lockState == CursorLockMode.Locked;
+        Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
+        canLook = !toggle;
+    }
+
+    private void CheckFall()
+    {
+        Rigidbody rb = GetComponentInChildren<Rigidbody>();
+        float fallChangeSpeed = -15.0f;
+        if (rb.velocity.y < fallChangeSpeed)
+        {
+            animator.SetBool("Fall", true);
+            fallingCheck = true;
+        }
+        else
+        {
+            StandUp();
+            animator.SetBool("Fall", false);
+        }
+    }
+
+    private void StandUp()
+    {
+        if (fallingCheck)
+        {
+            animator.SetBool("StandUp",true);
+            fallingCheck = false;
+        }
+    }
+
 
     bool IsGrounded()
     {
@@ -176,20 +220,11 @@ public class PlayerMovement : MonoBehaviour
         return false;
     }
 
-    public void TogglePlayerInput()
+    public bool WallHit(Vector3 dir)
     {
-        bool toggle = GameManager.Instance.currentGameState == GameState.GamePause;
-        Cursor.visible = toggle ? true : false;
-        playerInput.enabled = toggle ? false : true;
-        ToggleCursor();
-    }
-
-
-
-    public void ToggleCursor()
-    {
-        bool toggle = Cursor.lockState == CursorLockMode.Locked;
-        Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
-        canLook = !toggle;
+        Vector3 playerHead = transform.position;
+        playerHead.y += 1f;
+        Ray wallHitRay = new Ray(playerHead, dir);
+        return Physics.Raycast(wallHitRay, 0.3f , groundLayerMask);
     }
 }

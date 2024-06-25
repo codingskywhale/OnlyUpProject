@@ -11,7 +11,7 @@ public class ScenePotal : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            SceneManager.LoadScene(scenename);
+            GameManager.Instance.GameClear();
         }
     }
 }

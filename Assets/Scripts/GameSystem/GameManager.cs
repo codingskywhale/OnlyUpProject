@@ -73,12 +73,6 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    // State : 게임 시작
-    public void GameStartState()
-    {
-        currentGameState = GameState.GameStart;
-        //UIManager.Instance.ActiveUI(GameState.GameStart);
-    }
 
     public void GameStart()
     {
@@ -88,16 +82,22 @@ public class GameManager : MonoBehaviour
 
     public void GamePause()
     {
-        currentGameState = GameState.GamePause;
-        player.movementController.TogglePlayerInput();
-        UIManager.Instance.GamePauseUI.SetActive(true);
+        if (currentGameState == GameState.GameStart)
+        {
+            currentGameState = GameState.GamePause;
+            player.movementController.TogglePlayerInput();
+            UIManager.Instance.GamePauseUI.SetActive(true);
+        }
     }
 
     public void GameResume()
     {
-        currentGameState = GameState.GameStart;
-        player.movementController.TogglePlayerInput();
-        UIManager.Instance.GamePauseUI.SetActive(false);
+        if (currentGameState == GameState.GamePause)
+        {
+            currentGameState = GameState.GameStart;
+            player.movementController.TogglePlayerInput();
+            UIManager.Instance.GamePauseUI.SetActive(false);
+        }
     }
    
 
@@ -105,9 +105,8 @@ public class GameManager : MonoBehaviour
     public void GameClear()
     {
         currentGameState = GameState.GameClear;
-        // TODO : 나중에 buildindex로 수정
-        SceneManager.LoadScene("EndingScene");
-        //SceneManager.LoadScene(2);
+        //SceneManager.LoadScene("EndingScene");
+        SceneManager.LoadScene(2);
     }
 
     public void Restart()
@@ -136,26 +135,4 @@ public class GameManager : MonoBehaviour
         return result;
     }
 
-
-    // TODO : 아래 코드들 CharacterController쪽으로 옮길 것.
-    // 캐릭터 쪽 코드 어떻게 되어있는 건지 몰라서 임시로 여기에 둠
-    /*
-    public void TogglePlayerInput()
-    {
-        bool toggle = currentGameState == GameState.GamePause;
-        Cursor.visible = toggle ? true : false;
-        //playerInput.enabled = toggle ? false : true;
-        ToggleCursor();
-    }
-
-
-
-    public void ToggleCursor()
-    {
-        bool toggle = Cursor.lockState == CursorLockMode.Locked;
-        Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
-        //canLook = !toggle;
-    }
-    */
-    //
 }

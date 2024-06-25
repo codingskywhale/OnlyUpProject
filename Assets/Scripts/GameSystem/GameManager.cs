@@ -12,6 +12,12 @@ public enum GameState
     GameClear
 }
 
+public enum GameMode
+{
+    Single,
+    Multi
+}
+
 
 public class GameManager : MonoBehaviour
 {

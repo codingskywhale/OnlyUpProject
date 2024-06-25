@@ -8,7 +8,6 @@ public enum GameState
 {
     Intro,
     GameStart,
-    GamePause,
     GameClear
 }
 
@@ -37,7 +36,7 @@ public class GameManager : MonoBehaviour
     public GameState currentGameState { get; private set; }
 
     private float playTime = 0f;
-
+    public bool IsGamePause { get; private set; } = false;
 
     public Player_tmp player;
 
@@ -61,7 +60,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (currentGameState == GameState.GameStart)
+        if (currentGameState == GameState.GameStart && IsGamePause == false)
         {
             playTime += Time.deltaTime;
         }
@@ -84,9 +83,9 @@ public class GameManager : MonoBehaviour
 
     public void GamePause()
     {
-        if (currentGameState == GameState.GameStart)
+        if (IsGamePause == false)
         {
-            currentGameState = GameState.GamePause;
+            IsGamePause = true;
             player.movementController.TogglePlayerInput();
             UIManager.Instance.GamePauseUI.SetActive(true);
         }
@@ -94,9 +93,9 @@ public class GameManager : MonoBehaviour
 
     public void GameResume()
     {
-        if (currentGameState == GameState.GamePause)
+        if (IsGamePause == true)
         {
-            currentGameState = GameState.GameStart;
+            IsGamePause = false;
             player.movementController.TogglePlayerInput();
             UIManager.Instance.GamePauseUI.SetActive(false);
         }

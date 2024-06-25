@@ -142,7 +142,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void TogglePlayerInput()
     {
-        bool toggle = GameManager.Instance.currentGameState == GameState.GamePause;
+        bool toggle = GameManager.Instance.IsGamePause;
         Cursor.visible = toggle ? true : false;
         playerInput.enabled = toggle ? false : true;
         ToggleCursor();

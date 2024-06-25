@@ -7,8 +7,8 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance;
 
     AudioSource audioSource;
-    public AudioClip clip;
-
+    public AudioClip defaultClip;
+    public AudioClip endingClip;
     private void Awake()
     {
         if(Instance == null)
@@ -26,8 +26,24 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        audioSource.clip = clip;
-        audioSource.Play();
+        PlayBGM(defaultClip); // 기본 BGM 재생
+    }
+    public void PlayBGM(AudioClip clip)
+    {
+        if (audioSource.clip != clip)
+        {
+            audioSource.clip = clip;
+            audioSource.Play();
+        }
     }
 
+    public void PlayDefaultBGM()
+    {
+        PlayBGM(defaultClip);
+    }
+
+    public void PlayEndingBGM()
+    {
+        PlayBGM(endingClip);
+    }
 }

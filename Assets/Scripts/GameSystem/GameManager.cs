@@ -30,12 +30,10 @@ public class GameManager : MonoBehaviour
 
     public GameState currentGameState { get; private set; }
 
-    bool isPlaying;
-
-    public Text playTimeText;
     private float playTime = 0f;
+    
 
-    //public Player player;
+    public Player_tmp player;
 
     private void Awake()
     {
@@ -61,13 +59,9 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(currentGameState == GameState.GamePause)
+        if(currentGameState == GameState.GameStart)
         {
             playTime += Time.deltaTime;
-            if (playTimeText != null)
-            {
-                playTimeText.text = TimerFormat();
-            }
         }
     }
 
@@ -94,29 +88,25 @@ public class GameManager : MonoBehaviour
 
     public void GamePause()
     {
-        
-        switch (currentGameState)
-        {
-            case GameState.GameStart:
-                currentGameState = GameState.GamePause;
-                UIManager.Instance.GamePauseUI.SetActive(true);
-                break;
-            case GameState.GamePause:
-                currentGameState = GameState.GameStart;
-                UIManager.Instance.GamePauseUI.SetActive(false);
-                break;
-        }
-        
+        currentGameState = GameState.GamePause;
+        player.movementController.TogglePlayerInput();
+        UIManager.Instance.GamePauseUI.SetActive(true);
     }
 
-    
+    public void GameResume()
+    {
+        currentGameState = GameState.GameStart;
+        player.movementController.TogglePlayerInput();
+        UIManager.Instance.GamePauseUI.SetActive(false);
+    }
+   
 
     // State : 게임 클리어
     public void GameClear()
     {
         currentGameState = GameState.GameClear;
         // TODO : 나중에 buildindex로 수정
-        SceneManager.LoadScene("ClearScene");
+        SceneManager.LoadScene("EndingScene");
         //SceneManager.LoadScene(2);
     }
 
@@ -128,13 +118,44 @@ public class GameManager : MonoBehaviour
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public float GetPlayTime()
+    {
+        return playTime;
+    }
+
     public string TimerFormat()
     {
+        string result;
+
         int intPlayTime = (int)playTime;
         string hour = (intPlayTime / 3600).ToString("D2");
         string minute = ((intPlayTime % 3600) / 60).ToString("D2");
         string second = (intPlayTime % 60).ToString("D2");
 
-        return $"{hour}:{minute}:{second}";
+        result = $"{hour}:{minute}:{second}";
+        return result;
     }
+
+
+    // TODO : 아래 코드들 CharacterController쪽으로 옮길 것.
+    // 캐릭터 쪽 코드 어떻게 되어있는 건지 몰라서 임시로 여기에 둠
+    /*
+    public void TogglePlayerInput()
+    {
+        bool toggle = currentGameState == GameState.GamePause;
+        Cursor.visible = toggle ? true : false;
+        //playerInput.enabled = toggle ? false : true;
+        ToggleCursor();
+    }
+
+
+
+    public void ToggleCursor()
+    {
+        bool toggle = Cursor.lockState == CursorLockMode.Locked;
+        Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
+        //canLook = !toggle;
+    }
+    */
+    //
 }

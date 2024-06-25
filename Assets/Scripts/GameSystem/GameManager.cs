@@ -43,8 +43,8 @@ public class GameManager : MonoBehaviour
 
             Application.targetFrameRate = 60;
             // TODO : 테스트용으로 Start 상태에서 시작. 추후 인트로씬 만들면 intro에서 시작토록
-            //currentGameState = GameState.Intro;
-            currentGameState = GameState.GameStart;
+            currentGameState = GameState.Intro;
+            //currentGameState = GameState.GameStart;
 
             DontDestroyOnLoad(gameObject);
         }
@@ -84,6 +84,7 @@ public class GameManager : MonoBehaviour
     {
         if (currentGameState == GameState.GameStart)
         {
+            Debug.Log("GamePause");
             currentGameState = GameState.GamePause;
             player.movementController.TogglePlayerInput();
             UIManager.Instance.GamePauseUI.SetActive(true);
@@ -95,7 +96,7 @@ public class GameManager : MonoBehaviour
         if (currentGameState == GameState.GamePause)
         {
             currentGameState = GameState.GameStart;
-            player.movementController.TogglePlayerInput();
+            player.movementController?.TogglePlayerInput();
             UIManager.Instance.GamePauseUI.SetActive(false);
         }
     }

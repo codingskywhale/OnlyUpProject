@@ -77,7 +77,8 @@ https://assetstore.unity.com/packages/3d/characters/humanoids/character-elf-1144
 돌1: https://assetstore.unity.com/packages/3d/environments/landscapes/rock-pack-210536#content  
 돌2: https://assetstore.unity.com/packages/3d/environments/landscapes/photoreal-stones-pack-demo-70005  
 그리스 건축: https://assetstore.unity.com/packages/3d/environments/historic/greek-low-poly-pack-lite-136606  
-석상: https://assetstore.unity.com/packages/3d/props/discobolus-statue-107544
+석상: https://assetstore.unity.com/packages/3d/props/discobolus-statue-107544  
+표지판: https://assetstore.unity.com/packages/3d/environments/low-poly-woods-lifestyle-65306
 # UI
 https://assetstore.unity.com/packages/2d/gui/fantasy-wooden-gui-free-103811
 # 이펙트

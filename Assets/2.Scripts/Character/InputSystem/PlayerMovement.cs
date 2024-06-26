@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Linq;
@@ -11,7 +12,7 @@ using UnityEngine.UI;
 
 
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviourPun
 {
     [Header("Movement")]
     public float moveSpeed;
@@ -39,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
     AudioSource audioSource;
     public AudioClip clip;
 
+    private bool isPaused = false;
     private PlayerInput playerInput;
     private bool fallingCheck = false;
     private void Awake()
@@ -47,16 +49,22 @@ public class PlayerMovement : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         audioSource = GetComponentInChildren<AudioSource>();
         playerInput = GetComponent<PlayerInput>();
-    }
 
-    private void Start()
-    {
         Cursor.lockState = CursorLockMode.Locked;
         animator.SetBool("Idle", true);
     }
 
+    //private void Start()
+    //{
+    //    Cursor.lockState = CursorLockMode.Locked;
+    //    animator.SetBool("Idle", true);
+    //}
+
     void FixedUpdate()
     {
+        if(CheckOwnInMultiPlayer()) return;
+
+
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
 
         Move(isRunning);
@@ -75,6 +83,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (CheckOwnInMultiPlayer()) return;
+
         CheckFall();
         CameraLook();       
     }
@@ -112,6 +122,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnMove_(InputAction.CallbackContext context)
     {
+        if (CheckOwnInMultiPlayer()) return;
+
         if (context.phase == InputActionPhase.Performed)
         {
             curMovementInput = context.ReadValue<Vector2>();
@@ -127,11 +139,13 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnLook_(InputAction.CallbackContext context)
     {
+        if (CheckOwnInMultiPlayer()) return;
         mouseDelta = context.ReadValue<Vector2>();
     }
 
     public void OnJump_(InputAction.CallbackContext context)
     {
+        if (CheckOwnInMultiPlayer()) return;
         if (context.phase == InputActionPhase.Started && (IsGrounded()))
         {
             animator.SetBool("Jump", true);
@@ -230,9 +244,15 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnGamePause(InputAction.CallbackContext context)
     {
+        if (CheckOwnInMultiPlayer()) return;
         if (context.phase == InputActionPhase.Started)
         {
             GameManager.Instance.GamePause();
         }   
+    }
+
+    private bool CheckOwnInMultiPlayer()
+    {
+        return (photonView.IsMine == false && PhotonNetwork.IsConnected == true);
     }
 }

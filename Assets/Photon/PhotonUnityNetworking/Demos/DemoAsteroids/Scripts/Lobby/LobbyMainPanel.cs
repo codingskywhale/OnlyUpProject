@@ -1,4 +1,5 @@
 ﻿using ExitGames.Client.Photon;
+using Photon.Pun.Demo.PunBasics;
 using Photon.Realtime;
 using System.Collections.Generic;
 using UnityEngine;
@@ -168,8 +169,12 @@ namespace Photon.Pun.Demo.Asteroids
 
         public override void OnPlayerLeftRoom(Player otherPlayer)
         {
-            Destroy(playerListEntries[otherPlayer.ActorNumber].gameObject);
-            playerListEntries.Remove(otherPlayer.ActorNumber);
+            GameObject entry;
+            if (playerListEntries.TryGetValue(otherPlayer.ActorNumber, out entry))
+            {
+                Destroy(playerListEntries[otherPlayer.ActorNumber].gameObject);
+                playerListEntries.Remove(otherPlayer.ActorNumber);
+            }
 
             StartGameButton.gameObject.SetActive(CheckPlayersReady());
         }
@@ -269,10 +274,12 @@ namespace Photon.Pun.Demo.Asteroids
 
         public void OnStartGameButtonClicked()
         {
-            PhotonNetwork.CurrentRoom.IsOpen = false;
-            PhotonNetwork.CurrentRoom.IsVisible = false;
+            Debug.Log("이거 출력되면 안됨");
+            //PhotonNetwork.CurrentRoom.IsOpen = false;
+            //PhotonNetwork.CurrentRoom.IsVisible = false;
 
-            PhotonNetwork.LoadLevel("DemoAsteroids-GameScene");
+            //PhotonNetwork.LoadLevel(1);
+            //GameManager.Instance.GameStart();
         }
 
         #endregion

@@ -9,10 +9,6 @@ public class Player_tmp : MonoBehaviour
     private void Awake()
     {
         movementController = GetComponent<PlayerMovement>();
-    }
-
-    void Start()
-    {
         if (GameManager.Instance.player == null)
         {
             GameManager.Instance.player = this;

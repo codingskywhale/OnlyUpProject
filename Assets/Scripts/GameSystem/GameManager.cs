@@ -1,3 +1,5 @@
+using Photon.Pun;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,7 +20,7 @@ public enum GameMode
 }
 
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviourPunCallbacks
 {
     private static GameManager _Instance;
     public static GameManager Instance
@@ -38,7 +40,9 @@ public class GameManager : MonoBehaviour
     private float playTime = 0f;
     public bool IsGamePause { get; private set; } = false;
 
+    public Transform spawnPoint;
     public Player_tmp player;
+    public GameObject playerPrefab;
 
     private void Awake()
     {
@@ -58,12 +62,51 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        //SceneManager.sceneLoaded += OnSceneLoad;
+    }
+
+    private void OnSceneLoad(Scene arg0, LoadSceneMode arg1)
+    {
+        if (currentGameState == GameState.GameStart)
+        {
+            Debug.Log("StartState?");
+            StartCoroutine(nameof(Spawn));
+        }
+    }
+
     private void Update()
     {
         if (currentGameState == GameState.GameStart && IsGamePause == false)
         {
             playTime += Time.deltaTime;
         }
+    }
+
+    private void SpawnCharacter()
+    {
+        GameObject prefab = Resources.Load<GameObject>("Character");
+        Debug.Log("SpawnCharacter()");
+        Debug.Log("PhotonNetwork.IsConnected : "+ PhotonNetwork.IsConnected);
+        if (PhotonNetwork.IsConnected)
+        {
+            int idx = PhotonNetwork.LocalPlayer.ActorNumber;
+            Vector3 spawnPosition = spawnPoint.position + new Vector3(idx * 2, 0, 0);
+            PhotonNetwork.Instantiate(prefab.name, spawnPosition, spawnPoint.rotation);
+            //PhotonNetwork.Instantiate(playerPrefab.name, spawnPosition, spawnPoint.rotation);
+        }
+        else
+        {
+            Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
+            //Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
+        }
+    }
+
+    IEnumerator Spawn()
+    {
+        yield return new WaitUntil(()=>spawnPoint != null);
+        SpawnCharacter();
     }
 
 
@@ -78,7 +121,14 @@ public class GameManager : MonoBehaviour
     public void GameStart()
     {
         currentGameState = GameState.GameStart;
-        SceneManager.LoadScene(1);
+        if(PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.LoadLevel(1);
+        }
+        else
+        {
+            SceneManager.LoadScene(1);
+        }
     }
 
     public void GamePause()

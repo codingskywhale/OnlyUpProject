@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerStateMachine : StateMachine
 {
-    public Player Player { get; }
+    public Player_ Player { get; }
     public Vector2 MovementInput { get; set; }
     public float MovementSpeed { get; private set; }
     public float RotationDamping { get; private set; }
@@ -18,7 +18,7 @@ public class PlayerStateMachine : StateMachine
     public PlayerRunState playerRunState { get; private set; }
     public PlayerJumpState playerJumpState { get; private set; }
 
-    public PlayerStateMachine(Player player)
+    public PlayerStateMachine(Player_ player)
     {
         this.Player = player;
         MainCamTransform = Camera.main.transform;
